@@ -1,11 +1,27 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+*/target/*
+.idea/*
+*.mvn
+atlassian-ide-plugin.xml
+*.orig
+/logs/*
+*/logs/*
+target/*
+rebel.xml
+*/bin/*
+*/build/*
+.settings/*
+.svn/*
+*/.settings/*
+*/.svn/*
+.classpath
+*.log
+/target/
+
+mvnw
+mvnw.cmd
 
 ### STS ###
 .apt_generated
-.classpath
 .factorypath
 .project
 .settings
