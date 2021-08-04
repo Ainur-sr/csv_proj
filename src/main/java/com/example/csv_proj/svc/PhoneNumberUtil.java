@@ -1,5 +1,7 @@
 package com.example.csv_proj.svc;
 
+import org.springframework.util.StringUtils;
+
 /**
  * @author Ainur Shigapov <ainur.shigapov@novardis.com>
  */
@@ -7,7 +9,7 @@ package com.example.csv_proj.svc;
 public class PhoneNumberUtil {
 
     public static String normalizePhoneNumber(final String originNum) {
-        if (originNum == null) {
+        if (!StringUtils.hasText(originNum)) {
             return null;
         }
 

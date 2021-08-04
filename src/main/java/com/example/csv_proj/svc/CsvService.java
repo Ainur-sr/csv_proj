@@ -45,11 +45,15 @@ public class CsvService {
 
         Set<String> dbCollect = new HashSet<>();
         if (dbObjList != null) {
-            dbCollect = dbObjList.stream().map(CsvEntity::getMobNumber).collect(Collectors.toSet());
+            dbCollect = dbObjList.stream()
+                    .map(item -> PhoneNumberUtil.normalizePhoneNumber(item.getMobNumber()))
+                    .collect(Collectors.toSet());
         }
         Set<String> mktCollect = new HashSet<>();
         if (mktObjList != null) {
-            mktCollect = mktObjList.stream().map(CsvEntity::getMobNumber).collect(Collectors.toSet());
+            mktCollect = mktObjList.stream()
+                    .map(item -> PhoneNumberUtil.normalizePhoneNumber(item.getMobNumber()))
+                    .collect(Collectors.toSet());
         }
 
         Set<String> notExistNumbersInDb = processComparing(dbCollect, mktCollect);
@@ -70,11 +74,10 @@ public class CsvService {
 
     private Set<String> processComparing(Set<String> collectOne, Set<String> collectTwo) {
         final Set<String> resultCollect = new HashSet<>();
-        for (String mktNumber : collectTwo) {
-            if (mktNumber == null || mktNumber.isEmpty()) continue;
-            mktNumber = PhoneNumberUtil.normalizePhoneNumber(mktNumber);
-            if (!collectOne.contains(mktNumber)) {
-                resultCollect.add(mktNumber);
+        for (String collectTwoNumber : collectTwo) {
+            if (collectTwoNumber == null || collectTwoNumber.isEmpty()) continue;
+            if (!collectOne.contains(collectTwoNumber)) {
+                resultCollect.add(collectTwoNumber);
             }
         }
         return resultCollect;
